@@ -1,0 +1,3 @@
+# Publish validated pack archives as release assets, not Git blobs.
+*.zip
+*.mcpack
