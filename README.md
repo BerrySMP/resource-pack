@@ -2,6 +2,19 @@
 
 This repository is the GitHub home for the Java resource pack used by the network. Pack ZIPs belong in **versioned GitHub Releases** so each server can use a fixed download URL.
 
+## Planned shared servers
+
+This pack is intended to be shared by:
+
+- Kiwi
+- Mango
+- Oneblock
+- Survival
+- Apoc Earth
+- Power
+
+This is the planned rollout. These servers have not been switched to a GitHub pack URL yet.
+
 ## Current source
 
 Survival's ItemsAdder `external-host.url`, checked on 2026-10-08:
