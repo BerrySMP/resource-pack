@@ -12,7 +12,7 @@ The first release mirrors the pack currently configured on Apoc Earth (the PEart
 - SHA-256: `1acb5fbc9936cddc06a52f3c5aa196f5604728829901d572d0bbf7bbe1691d1d`
 - Source at publication: <https://lobfile.com/file/W8efRMeF.zip>
 
-The GitHub download was checked anonymously against the source ZIP and matched both hashes. No Minecraft server configuration has been changed to use GitHub yet.
+The GitHub download was checked anonymously against the source ZIP and matched both hashes. Apoc Earth's ItemsAdder configuration now points to this versioned GitHub URL. GitHub serves release ZIPs as `application/octet-stream`, so ItemsAdder's `skip_url_file_type_check` is enabled for this verified URL. ItemsAdder accepted it after a reload on October 8, 2026. No server restart was triggered; player download and visuals have not yet been verified.
 
 ## Planned shared servers
 
@@ -25,15 +25,24 @@ This pack is intended to be shared by:
 - Apoc Earth
 - Power
 
-The published ZIP is the current Apoc Earth pack only. It has not been merged or validated for the other listed servers. None of these servers has been switched to a GitHub pack URL.
+The published ZIP is the current Apoc Earth pack only. It has not been merged or validated for the other listed servers. Kiwi, Mango, Oneblock, Survival, and Power have not been switched to a GitHub pack URL.
 
-## Publish a pack version
+## Upload a new pack ZIP to GitHub
 
-1. Download the exact intended ZIP from its current source. Keep its bytes unchanged.
-2. Check that the archive opens and contains `pack.mcmeta` at its root. Record its SHA-1 (`Get-FileHash -Algorithm SHA1` on Windows).
-3. Create a GitHub Release with a new version tag and attach the ZIP as `pack.zip`. GitHub's automatically generated “Source code (zip)” is a repository archive, not a Minecraft pack.
-4. Confirm that the release asset downloads anonymously and that its SHA-1 matches the source ZIP.
-5. In a separately authorized rollout, update the intended server's ItemsAdder `external-host.url` to the **versioned release asset URL** and follow that server's deployment schedule. Keep the previous URL for rollback.
+Upload the pack as a **release asset** so it has its own versioned download link.
+
+1. Put the finished ZIP on your computer and open it. `pack.mcmeta` and the `assets` folder must be directly inside the ZIP, not inside another folder. Name the ZIP `pack.zip`; renaming the file does not change its contents.
+2. Sign in to a GitHub account with write access and open the [BerrySMP resource-pack repository](https://github.com/BerrySMP/resource-pack). Click **Releases** on the repository page, then **Draft a new release**.
+3. Open **Choose a tag**, type a new tag such as `pack-YYYY-MM-DD-2`, and select **Create new tag**. Do not reuse a tag from an older pack. Target the `main` branch, enter a release title, and describe which server or source the ZIP came from.
+4. Drag `pack.zip` into the release form's binary file box, or select it from your computer. Wait until the upload finishes and `pack.zip` appears in the file list. Click **Publish release**.
+5. On the published release page, find `pack.zip` under **Assets** and copy its link. Do **not** use GitHub's automatically generated **Source code (zip)**; that contains this repository, not the Minecraft pack.
+6. Open the asset link in a private browser window and download it. Check that the downloaded ZIP opens and still has `pack.mcmeta` at its root. Compare its SHA-1 with your original ZIP using PowerShell:
+
+   ```powershell
+   Get-FileHash -LiteralPath "C:\path\to\pack.zip" -Algorithm SHA1
+   ```
+
+   Run the command once for the original and once for the GitHub download. The hashes must match.
 
 The release asset URL has this form:
 
@@ -41,4 +50,4 @@ The release asset URL has this form:
 https://github.com/BerrySMP/resource-pack/releases/download/<tag>/pack.zip
 ```
 
-Do not point a server at a GitHub URL until the asset and download check are complete.
+Only after these checks, update a server's ItemsAdder `external-host.url` to the versioned asset link as a separate rollout. GitHub release downloads may require `skip_url_file_type_check: true` because they use `application/octet-stream`; enable it only for a verified ZIP. Keep the previous URL for rollback, and follow that server's deployment schedule.
