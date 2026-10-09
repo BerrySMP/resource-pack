@@ -2,30 +2,30 @@
 
 This repository hosts versioned Java resource-pack ZIPs for the network.
 
-## Published pack
+## Which server uses which pack (2026-10-09)
 
-The first release mirrors the pack currently configured on Apoc Earth (the PEarth backend):
+Each link below is a versioned release asset. Every server's ItemsAdder `resource-pack.hosting.external-host.url` points at one of them. The old `download.mc-packs.net` links were replaced because that service is rate-limiting, returning errors and blocking some IPs.
 
-- [Download `pack.zip`](https://github.com/BerrySMP/resource-pack/releases/download/pack-2026-10-08-1/pack.zip)
-- Version: `pack-2026-10-08-1`
-- SHA-1: `4c139d3a63682161469cf1aaa199074f9679a04d`
-- SHA-256: `1acb5fbc9936cddc06a52f3c5aa196f5604728829901d572d0bbf7bbe1691d1d`
-- Source at publication: <https://lobfile.com/file/W8efRMeF.zip>
+| Release | Servers | Contents |
+|---|---|---|
+| [`shared-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/shared-2026-10-09/pack.zip) | Survival, PowerSMP, AvatarSMP Survival, Mango, Apoc Earth (Hub's config too, but ItemsAdder isn't running there) | The shared network pack: Muertos and Hellborn, the Polygony Nexus set and the dev-store assets |
+| [`kiwi-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/kiwi-2026-10-09/pack.zip) | Kiwi | Kiwi's own pack, until its ItemsAdder item IDs are aligned with the shared pack |
+| [`oneblock-grape-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/oneblock-grape-2026-10-09/pack.zip) | Oneblock Grape | Grape's own pack, until its ItemsAdder item IDs are aligned |
+| [`earth-classic-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/earth-classic-2026-10-09/pack.zip) | Earth-Classic | Earth-Classic's separate full pack (stays separate) |
+| [`avatar-hub-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/avatar-hub-2026-10-09/pack.zip) | AvatarSMP Hub | AvatarSMP Hub's own pack |
 
-The GitHub download was checked anonymously against the source ZIP and matched both hashes. Apoc Earth's ItemsAdder configuration pointed to this first-release URL when it was published. GitHub serves release ZIPs as `application/octet-stream`, so ItemsAdder's `skip_url_file_type_check` is enabled for this verified URL. ItemsAdder accepted it after a reload on October 8, 2026. No server restart was triggered; player download and visuals have not yet been verified.
+IslandSMP serves its pack from the server itself (ItemsAdder `simple_self_host`), so it isn't listed here. Each release's notes give the exact SHA-1 and SHA-256 hashes and the source.
 
-## Planned shared servers
+### Why some servers can't share the pack yet
 
-This pack is intended to be shared by:
+ItemsAdder gives each custom item a `custom_model_data` number per server, stored in `plugins/ItemsAdder/storage/items_ids_cache.yml`. A pack only shows the right textures on servers whose numbers match:
 
-- Kiwi
-- Mango
-- Oneblock
-- Survival
-- Apoc Earth
-- Power
+- Survival, PowerSMP, AvatarSMP Survival and Mango have identical caches. Hub and Apoc Earth are compatible with them.
+- Kiwi differs on about 50 items, Grape on about 62, and Earth-Classic almost entirely.
 
-The published ZIP is the current Apoc Earth pack only. It has not been merged or validated for the other listed servers. Kiwi, Mango, Oneblock, Survival, and Power have not been switched to a GitHub pack URL.
+Before moving a server onto the shared pack, align its cache, at a scheduled restart.
+
+The Nexus items in the shared pack use `custom_model_data` 9100000 and up, a range ItemsAdder's own numbering won't reach.
 
 ## Geyser reference files
 
@@ -55,17 +55,17 @@ https://github.com/BerrySMP/resource-pack/releases/download/pack-2026-10-08-2/pa
 
 ## ItemsAdder config example
 
-In `plugins/ItemsAdder/config.yml`, the GitHub link goes in `resource-pack.hosting.external-host.url`. This example shows the URL currently configured on Apoc Earth:
+In `plugins/ItemsAdder/config.yml`, the GitHub link goes in `resource-pack.hosting.external-host.url`. This example shows the shared pack URL:
 
 ```yaml
 resource-pack:
   hosting:
     external-host:
       enabled: true
-      url: https://github.com/BerrySMP/resource-pack/releases/download/pack-2026-10-08-2/pack.zip
+      url: https://github.com/BerrySMP/resource-pack/releases/download/shared-2026-10-09/pack.zip
       skip_url_file_type_check: true
 ```
 
 For a later release, replace the value after `url:` with that release's `pack.zip` asset link. Keep the other settings already in your server's config.
 
-Before using the link on a server, open it once to confirm `pack.zip` downloads. Then update that server's ItemsAdder `external-host.url` to the versioned asset link as a separate rollout. GitHub release downloads may require `skip_url_file_type_check: true` because they use `application/octet-stream`; enable it only for a verified ZIP. Keep the previous URL for rollback, and follow that server's deployment schedule.
+Before using the link on a server, open it once to confirm `pack.zip` downloads. Then update that server's ItemsAdder `external-host.url` to the versioned asset link as a separate rollout. GitHub release downloads need the file-type check skipped because they use `application/octet-stream`. Older ItemsAdder versions call the key `skip-url-file-type-check___DONT_ASK_HELP_IF_SET_TRUE`; enable it only for a verified ZIP. Keep the previous URL for rollback, and follow that server's deployment schedule.
