@@ -12,7 +12,7 @@ The first release mirrors the pack currently configured on Apoc Earth (the PEart
 - SHA-256: `1acb5fbc9936cddc06a52f3c5aa196f5604728829901d572d0bbf7bbe1691d1d`
 - Source at publication: <https://lobfile.com/file/W8efRMeF.zip>
 
-The GitHub download was checked anonymously against the source ZIP and matched both hashes. Apoc Earth's ItemsAdder configuration now points to this versioned GitHub URL. GitHub serves release ZIPs as `application/octet-stream`, so ItemsAdder's `skip_url_file_type_check` is enabled for this verified URL. ItemsAdder accepted it after a reload on October 8, 2026. No server restart was triggered; player download and visuals have not yet been verified.
+The GitHub download was checked anonymously against the source ZIP and matched both hashes. Apoc Earth's ItemsAdder configuration pointed to this first-release URL when it was published. GitHub serves release ZIPs as `application/octet-stream`, so ItemsAdder's `skip_url_file_type_check` is enabled for this verified URL. ItemsAdder accepted it after a reload on October 8, 2026. No server restart was triggered; player download and visuals have not yet been verified.
 
 ## Planned shared servers
 
@@ -48,5 +48,20 @@ For example, the [second release](https://github.com/BerrySMP/resource-pack/rele
 ```text
 https://github.com/BerrySMP/resource-pack/releases/download/pack-2026-10-08-2/pack.zip
 ```
+
+## ItemsAdder config example
+
+In `plugins/ItemsAdder/config.yml`, the GitHub link goes in `resource-pack.hosting.external-host.url`. This example shows the URL currently configured on Apoc Earth:
+
+```yaml
+resource-pack:
+  hosting:
+    external-host:
+      enabled: true
+      url: https://github.com/BerrySMP/resource-pack/releases/download/pack-2026-10-08-2/pack.zip
+      skip_url_file_type_check: true
+```
+
+For a later release, replace the value after `url:` with that release's `pack.zip` asset link. Keep the other settings already in your server's config.
 
 Before using the link on a server, open it once to confirm `pack.zip` downloads. Then update that server's ItemsAdder `external-host.url` to the versioned asset link as a separate rollout. GitHub release downloads may require `skip_url_file_type_check: true` because they use `application/octet-stream`; enable it only for a verified ZIP. Keep the previous URL for rollback, and follow that server's deployment schedule.
