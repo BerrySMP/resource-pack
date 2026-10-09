@@ -27,6 +27,10 @@ This pack is intended to be shared by:
 
 The published ZIP is the current Apoc Earth pack only. It has not been merged or validated for the other listed servers. Kiwi, Mango, Oneblock, Survival, and Power have not been switched to a GitHub pack URL.
 
+## Geyser reference files
+
+Use [Geyser latest](geyser/latest/README.md) to record the most recent Geyser mappings and Bedrock `.mcpack` together. This folder is for reference and logging only; no server configuration should point to its files. It is empty until fresh files are uploaded and recorded.
+
 ## Upload a new pack ZIP to GitHub
 
 Upload the pack as a **release asset** so it has its own versioned download link.
