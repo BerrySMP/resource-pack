@@ -2,15 +2,15 @@
 
 This repository hosts versioned Java resource-pack ZIPs for the network.
 
-## Which server uses which pack (2026-10-09)
+## Which server uses which pack (2026-10-10)
 
 Each link below is a versioned release asset. Every server's ItemsAdder `resource-pack.hosting.external-host.url` points at one of them. The old `download.mc-packs.net` links were replaced because that service is rate-limiting, returning errors and blocking some IPs.
 
 | Release | Servers | Contents |
 |---|---|---|
-| [`shared-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/shared-2026-10-09/pack.zip) | Survival, PowerSMP, AvatarSMP Survival, Mango, Apoc Earth (Hub's config too, but ItemsAdder isn't running there) | The shared network pack: Muertos and Hellborn, the Polygony Nexus set and the dev-store assets |
+| [`shared-2026-10-10`](https://github.com/BerrySMP/resource-pack/releases/download/shared-2026-10-10/pack.zip) | Survival, PowerSMP, AvatarSMP Survival, Mango, Apoc Earth (Hub's config too, but ItemsAdder isn't running there) | The shared network pack: Muertos and Hellborn, the Polygony Nexus set, the dev-store assets, PokePals and BerryGuide. Replaces `shared-2026-10-09` (same content without PokePals/BerryGuide) as each server switches at its daily restart |
 | [`kiwi-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/kiwi-2026-10-09/pack.zip) | Kiwi | Kiwi's own pack, until its ItemsAdder item IDs are aligned with the shared pack |
-| [`oneblock-grape-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/oneblock-grape-2026-10-09/pack.zip) | Oneblock Grape | Grape's own pack, until its ItemsAdder item IDs are aligned |
+| [`oneblock-grape-2026-10-10`](https://github.com/BerrySMP/resource-pack/releases/download/oneblock-grape-2026-10-10/pack.zip) | Oneblock Grape | Grape's own pack plus PokePals and BerryGuide, until its ItemsAdder item IDs are aligned. Replaces `oneblock-grape-2026-10-09` at Grape's daily restart |
 | [`earth-classic-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/earth-classic-2026-10-09/pack.zip) | Earth-Classic | Earth-Classic's separate full pack (stays separate) |
 | [`avatar-hub-2026-10-09`](https://github.com/BerrySMP/resource-pack/releases/download/avatar-hub-2026-10-09/pack.zip) | AvatarSMP Hub | AvatarSMP Hub's own pack |
 
@@ -62,7 +62,7 @@ resource-pack:
   hosting:
     external-host:
       enabled: true
-      url: https://github.com/BerrySMP/resource-pack/releases/download/shared-2026-10-09/pack.zip
+      url: https://github.com/BerrySMP/resource-pack/releases/download/shared-2026-10-10/pack.zip
       skip_url_file_type_check: true
 ```
 
